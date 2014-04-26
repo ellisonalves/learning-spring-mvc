@@ -10,4 +10,6 @@ Just a projet to learn and practice spring-mvc and other concepts eventually.
 * Java 8 (I'm also trying some java 8 features when it is possible)
 
 # TODO LIST (About Configuration)
-* Update frameworks versions
+* Update Spring version to 4.x
+* Update Validation Bean API to 1.1.x
+* Update Hibernate Validator to current
