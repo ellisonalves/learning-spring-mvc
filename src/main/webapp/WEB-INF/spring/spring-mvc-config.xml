@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!-- Search for @Controller annotations only -->
+    <context:component-scan base-package="br.com.aprendendospringmvc.controllers" use-default-filters="false">
+        <context:include-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
+    </context:component-scan>
+
+    <!-- Configures the annotation-driven Spring MVC Controller programming model. -->
+    <mvc:annotation-driven/>
+
+    <!-- Configures a handler for serving static resources by forwarding to the Servlet container's default Servlet -->
+    <!--<mvc:default-servlet-handler />-->
+
+    <!-- Configures a handler for serving static resources such as images, js, and, css files with cache headers optimized for efficient
+	loading in a web browser -->
+    <mvc:resources mapping="/webresources/**" location="/webresources/"/>
+
+    <!-- SpringMVC will intercept all requests. So, its not necessary expose *.jsp files to user -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+</beans>
