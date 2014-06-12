@@ -1,6 +1,5 @@
 package br.com.aprendendospringmvc.repository.impl;
 
-import br.com.aprendendospringmvc.entity.BasicPojo;
 import br.com.aprendendospringmvc.entity.Pojo;
 import br.com.aprendendospringmvc.repository.IRepository;
 
@@ -27,8 +26,8 @@ public final class ListInMemoryRepository implements IRepository {
 
     /**
      * A unique instance for this class.
-     * So, whenever we invoke an object that invoke an this implementation of repository,
-     * we'll invoking the repository with actual objects in memory.
+     * So, whenever we invoke an object that invokes this implementation of repository,
+     * we're invoking the repository with actual objects in memory.
      *
      * @return
      */
@@ -36,12 +35,11 @@ public final class ListInMemoryRepository implements IRepository {
         return INSTANCE;
     }
 
-
     @Override
     public void save(Pojo basicPojo) {
 
         Optional<Long> optionalId = INSTANCE.listAll().stream()
-                .map(p -> p.getId())
+                .map((p) -> p.getId())
                 .max(Long::compare);
 
         optionalId.ifPresent((c) -> basicPojo.setId(c + 1L));
@@ -54,6 +52,21 @@ public final class ListInMemoryRepository implements IRepository {
     }
 
     @Override
+    public Pojo update(Pojo pojo) {
+
+        Pojo persistedPojo = get(pojo.getId());
+
+        if (Pojo.NULL.equals(persistedPojo)) {
+            throw new RuntimeException("Pojo can't be founded");
+        }
+
+        remove(persistedPojo);
+        save(pojo);
+
+        return pojo;
+    }
+
+    @Override
     public void remove(Pojo pojo) {
         persistedPojos.removeIf((p) -> p.getId().equals(pojo.getId()));
     }
@@ -61,12 +74,10 @@ public final class ListInMemoryRepository implements IRepository {
     @Override
     public Pojo get(Serializable id) {
 
-        Pojo retorno = persistedPojos.stream()
+        return listAll().stream()
                 .filter((p) -> id.equals(p.getId()))
                 .findFirst()
-                .orElse((Pojo) BasicPojo.NULL);
-
-        return retorno;
+                .orElseGet(() -> Pojo.NULL);
     }
 
     @Override

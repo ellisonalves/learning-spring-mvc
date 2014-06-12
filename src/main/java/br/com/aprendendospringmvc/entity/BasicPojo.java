@@ -7,8 +7,6 @@ import java.io.Serializable;
  */
 public interface BasicPojo extends Serializable {
 
-    public static final BasicPojo NULL = () -> Long.MIN_VALUE;
-
     Long getId();
 
 }

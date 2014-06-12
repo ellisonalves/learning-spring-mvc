@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- [internationalization-config] -->
-    <!-- Spring can reach message's files using this class and will add '_' to resource bundle -->
+    <!-- Spring can reach message's files using this class and will add '_' + location to resource bundle -->
     <bean id="messageSource"
           class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="basename" value="classpath:app-messages/messages"/>

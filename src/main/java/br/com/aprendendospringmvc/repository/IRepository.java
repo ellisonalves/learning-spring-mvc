@@ -1,6 +1,5 @@
 package br.com.aprendendospringmvc.repository;
 
-import br.com.aprendendospringmvc.entity.BasicPojo;
 import br.com.aprendendospringmvc.entity.Pojo;
 
 import java.io.Serializable;
@@ -11,12 +10,14 @@ import java.util.List;
  */
 public interface IRepository {
 
-    void save(Pojo basicPojo);
+    void save(Pojo pojo);
+
+    Pojo update(Pojo pojo);
 
     Pojo get(Serializable id);
 
     List<Pojo> listAll();
 
-    void remove(Pojo basicPojo);
+    void remove(Pojo pojo);
 
 }

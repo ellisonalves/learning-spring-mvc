@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: ellison
@@ -31,9 +32,11 @@
             <td>${tarefa.descricao}</td>
             <td>${tarefa.finalizado? 'Finalizado' : 'Não finalizado'}</td>
             <td>
-            <fmt:formatDate value="${tarefa.dataFinalizacao}"
+            <fmt:formatDate value="${tarefa.dataFinalizacao.time}"
                             pattern="dd/MM/yyyy" /> </td>
-            <td><a href="remover?id=${tarefa.id}">Remover</a></td>
+            <td>
+               <a href="show?id=${tarefa.id}">Update</a> | <a href="remover?id=${tarefa.id}">Remover</a>
+            </td>
         </tr>
     </c:forEach>
 </table>

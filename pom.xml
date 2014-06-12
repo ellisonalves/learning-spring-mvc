@@ -63,6 +63,14 @@
         </dependency>
         <!-- [/hibernate-validator] -->
 
+        <!-- [jodatime] -->
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>1.6</version>
+        </dependency>
+        <!-- [/jodatime] -->
+
     </dependencies>
 
 </project>

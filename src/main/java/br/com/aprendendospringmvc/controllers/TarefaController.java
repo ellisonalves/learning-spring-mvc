@@ -19,14 +19,14 @@ public class TarefaController {
 
     @RequestMapping(value = "new")
     public String form() {
-        return "tarefa/form";
+            return "tarefa/form";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String add(@Valid Tarefa tarefa, BindingResult result, Model model) {
 
         if (result.hasErrors()) {
-            return "redirect:new";
+            return "forward:new";
         }
 
         tarefa.salvar();
@@ -34,6 +34,12 @@ public class TarefaController {
         model.addAttribute("tarefa", tarefa);
 
         return "tarefa/confirm";
+    }
+
+    @RequestMapping(value = "update", method = RequestMethod.POST)
+    public String update(Tarefa tarefa) {
+        ListInMemoryRepository.getInstance().update(tarefa);
+        return "redirect:list";
     }
 
     @RequestMapping(value = "list")
@@ -47,6 +53,14 @@ public class TarefaController {
     public String remover(Tarefa tarefa) {
         ListInMemoryRepository.getInstance().remove(tarefa);
         return "forward:list";
+    }
+
+    @RequestMapping(value = "show", method = RequestMethod.GET)
+    public String show(Long id, Model model) {
+        Tarefa tarefa = (Tarefa) ListInMemoryRepository.getInstance().get(id);
+        model.addAttribute("tarefa", tarefa);
+
+        return "tarefa/show";
     }
 
 }

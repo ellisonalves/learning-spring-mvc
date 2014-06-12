@@ -2,6 +2,7 @@ package br.com.aprendendospringmvc.entity;
 
 import br.com.aprendendospringmvc.repository.impl.ListInMemoryRepository;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Size;
 import java.util.Calendar;
@@ -13,12 +14,13 @@ public class Tarefa implements Pojo {
 
     private Long id;
 
-    @NotBlank(message = "{validation.bean.notBlank}")
-    @Size(min = 5, message = "{validation.bean.size.min}")
+    @NotBlank
+    @Size(min = 5)
     private String descricao;
 
     private boolean finalizado;
 
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Calendar dataFinalizacao;
 
     @Override
