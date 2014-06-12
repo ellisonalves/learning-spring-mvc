@@ -56,11 +56,15 @@ public final class ListInMemoryRepository implements IRepository {
 
         Pojo persistedPojo = get(pojo.getId());
 
+        if (!pojo.getId().equals(persistedPojo.getId())) {
+            throw new RuntimeException("It's not the same object");
+        }
+
         if (Pojo.NULL.equals(persistedPojo)) {
             throw new RuntimeException("Pojo can't be founded");
         }
 
-        remove(persistedPojo);
+        remove(persistedPojo); // easier than set properties.
         save(pojo);
 
         return pojo;
